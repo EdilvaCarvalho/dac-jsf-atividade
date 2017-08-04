@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/template.xhtml">
+            <ui:define name="corpo">
+                <h:form>
+                    <div class="form-group col-md-6">
+                        <h:outputLabel value="Nome:"/>
+                        <h:inputText class="form-control" value="#{controllerAutor.autor.nome}" 
+                                     required="true" 
+                                     requiredMessage="É preciso informar seu nome!"
+                                     id="nome"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h:outputLabel value="Email:"/>
+                        <h:inputText class="form-control" value="#{controllerAutor.autor.email}" 
+                                     required="true" 
+                                     requiredMessage="É preciso informar seu email!"
+                                     id="email"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h:outputLabel value="CPF:"/>
+                        <h:inputText class="form-control" value="#{controllerAutor.autor.cpf}" 
+                                     required="true" 
+                                     requiredMessage="É preciso informar seu cpf!"
+                                     maxlength="11"
+                                     id="cpf"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h:commandButton value="Salvar" 
+                                         action="#{controllerAutor.salvarAutor()}"
+                                         rendered="#{!controllerAutor.editando}" class="btn btn-primary col-md-2"/>
+                        <h:commandButton value="Atualizar" 
+                                         action="#{controllerAutor.atualizar()}" 
+                                         rendered="#{controllerAutor.editando}" class="btn btn-success col-md-2"/>
+                    </div>
+
+                </h:form>
+                <h:form>
+                    <div class="form-group col-md-12">
+                        <h:dataTable var="autor" value="#{controllerAutor.todosOsAutores}" class="table">
+                            <h:column>
+                                <f:facet name="header">Name</f:facet>
+                                <h:outputText value="#{autor.nome}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Email</f:facet>
+                                <h:outputText value="#{autor.email}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">CPF</f:facet>
+                                <h:outputText value="#{autor.cpf}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Excluir</f:facet>
+                                <h:commandButton value="remover" 
+                                                 action="#{controllerAutor.removerAutor(autor)}" class="btn btn-danger col-md-6"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Editar</f:facet>
+                                <h:commandButton value="editar" 
+                                                 action="#{controllerAutor.editarAutor(autor)}" class="btn btn-success col-md-6" />
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -9,7 +9,7 @@ public class Autor {
 
     private String nome;
     private String email;
-    private CPF cpf;
+    private String cpf;
 
     public Autor() {
     }
@@ -22,11 +22,19 @@ public class Autor {
         this.nome = nome;
     }
 
-    public CPF getCpf() {
+//    public CPF getCpf() {
+//        return cpf;
+//    }
+//
+//    public void setCpf(CPF cpf) {
+//        this.cpf = cpf;
+//    }
+
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(CPF cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

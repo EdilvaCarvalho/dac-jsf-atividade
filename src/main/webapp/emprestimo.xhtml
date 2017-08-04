@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/template.xhtml">
+            <ui:define name="corpo">
+                <h:form>
+                    <div class="form-group col-md-6">
+                        <h:outputLabel value="Nome do cliente:"/>
+                        <h:inputText value="#{controllerEmprestimo.emprestimo.nomeDoCliente}" 
+                                     required="true" 
+                                     requiredMessage="É preciso informar nome do cliente!"
+                                     id="nome" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h:outputLabel value="Livro:"/>
+                        <h:selectOneMenu value="#{controllerEmprestimo.isbn}" class="form-control"> 
+                            <f:selectItems value="#{livroController.todosOsLivros}" var="item" itemValue="#{item.ISBN}" itemLabel="#{item.descricao}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h:commandButton value="Emprestar" 
+                                         action="#{controllerEmprestimo.emprestar()}"
+                                         rendered="#{!controllerEmprestimo.editando}" class="btn btn-primary col-md-2"/>
+                        <h:commandButton value="Atualizar" 
+                                         action="#{controllerEmprestimo.atualizar()}" 
+                                         rendered="#{controllerEmprestimo.editando}" class="btn btn-success col-md-2"/>
+                    </div>
+                </h:form>
+                <h:form>
+                    <div class="form-group col-md-12">
+                        <h:dataTable var="emprestimo" value="#{controllerEmprestimo.todosOsEmprestimos}" class="table">
+                            <h:column>
+                                <f:facet name="header">ISBN do Livro</f:facet>
+                                <h:outputText value="#{emprestimo.livro.ISBN}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Descrição</f:facet>
+                                <h:outputText value="#{emprestimo.livro.descricao}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Cliente</f:facet>
+                                <h:outputText value="#{emprestimo.nomeDoCliente}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Data do Emprestimo</f:facet>
+                                <h:outputText value="#{emprestimo.dataDoEmprestimo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Situação</f:facet>
+                                <h:outputText value="#{emprestimo.situacao}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Emprestar</f:facet>
+                                <h:commandButton value="Devolver" 
+                                                 action="#{controllerEmprestimo.devolver(emprestimo)}" class="btn btn-primary col-md-8"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Devolver</f:facet>
+                                <h:commandButton value="Editar" 
+                                                 action="#{controllerEmprestimo.editarEmprestimo(emprestimo)}" class="btn btn-success col-md-8"/>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

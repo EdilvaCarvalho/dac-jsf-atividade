@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="template/template.xhtml">
+            <ui:define name="corpo">
+                <h:form>
+                    <div class="form-group col-md-4">
+                        <h:outputLabel value="Descrição:"/>
+                        <h:inputText value="#{livroController.livro.descricao}" 
+                                     required="true" 
+                                     requiredMessage="É preciso informar a descrição do livro!"
+                                     id="nome" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <h:outputLabel value="ISBN:"/>
+                        <h:inputText value="#{livroController.livro.ISBN}" 
+                                     required="true" 
+                                     requiredMessage="É preciso informar o ISBN do livro!"
+                                     id="email" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <h:outputLabel value="Edição:"/>
+                        <h:inputText value="#{livroController.livro.edicao}" 
+                                     required="true" 
+                                     requiredMessage="É preciso informar a edição do livro!"
+                                     maxlength="11"
+                                     id="cpf" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <h:commandButton value="Salvar" 
+                                         action="#{livroController.salvarLivro()}"
+                                         rendered="#{!livroController.editando}" class="btn btn-primary col-md-2"/>
+                        <h:commandButton value="Atualizar" 
+                                         action="#{livroController.atualizar()}" 
+                                         rendered="#{livroController.editando}" class="btn btn-success col-md-2"/>
+                    </div>
+                </h:form>
+                <h:form>
+                    <div class="form-group col-md-12">
+                        <h:dataTable var="livro" value="#{livroController.todosOsLivros}" class="table">
+                            <h:column>
+                                <f:facet name="header">ISBN</f:facet>
+                                <h:outputText value="#{livro.ISBN}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Descrição</f:facet>
+                                <h:outputText value="#{livro.descricao}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Edição</f:facet>
+                                <h:outputText value="#{livro.edicao}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Excluir</f:facet>
+                                <h:commandButton value="Remover" 
+                                                 action="#{livroController.removerLivro(livro)}" class="btn btn-danger col-md-6"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Editar</f:facet>
+                                <h:commandButton value="Editar" 
+                                                 action="#{livroController.editarLivro(livro)}" class="btn btn-success col-md-6"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Adicionar Autor</f:facet>
+                                <h:commandLink value="Adicionar Autor" 
+                                               action="#{livroController.pegaLivro(livro)}" class="btn btn-primary col-md-6"/>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

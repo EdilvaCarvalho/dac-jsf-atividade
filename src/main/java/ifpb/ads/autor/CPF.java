@@ -16,6 +16,7 @@ public class CPF {
     public String valor() {
         return valor;
     }
+    
     public String formatado() {
         String cpf = valor;
 

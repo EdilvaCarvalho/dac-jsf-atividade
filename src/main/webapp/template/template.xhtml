@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Emprestimos de Livros</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <h:outputStylesheet library="css" name="estilo.css" />
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.xhtml" id="index">Home</a>
+                    <a class="navbar-brand" href="livro.xhtml" id="index">Livros</a>
+                    <a class="navbar-brand" href="autor.xhtml" id="index">Autores</a>
+                    <a class="navbar-brand" href="emprestimo.xhtml" id="index">Emprestimos</a>
+                </div>
+            </div>
+        </nav>
+            <div class="container">
+                <div class="row">
+                    <ui:insert name="corpo"></ui:insert>
+                </div>
+            </div>
+        <footer>
+            <h4>Emprestimos de Livros 2017. Todos os direitos reservados</h4>
+        </footer>
+    </h:body>
+</html>
